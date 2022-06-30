@@ -3,7 +3,7 @@ import Select from "./Select";
 
 const Form = () => {
   return (
-    <div>
+    <div className="flex">
       <Select />
       <Search />
     </div>
