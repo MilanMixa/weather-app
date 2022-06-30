@@ -1,6 +1,6 @@
-import axios from "axios";
+import axios from "../axiosInstance";
 
-const APIKey = process.env.ApiKey;
+const APIKey = process.env.REACT_APP_API_KEY;
 
-export const getGeo = (city: any, limit: any) =>
-  axios.get(`/geo/1.0/direct?q=${city},&limit=${limit}&appid=${APIKey}`);
+export const getGeo = (city: string) =>
+  axios.get(`/geo/1.0/direct?q=${city}&limit=5&appid=${APIKey}`);
