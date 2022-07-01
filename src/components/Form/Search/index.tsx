@@ -1,5 +1,5 @@
 const Search = () => {
-  // const { country, countryStatus } = useSelect("London");
+  // const { country, countryStatus, setCity } = useSelect();
   // console.log(country, countryStatus);
   return (
     <div>

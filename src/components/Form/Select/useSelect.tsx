@@ -1,16 +1,18 @@
+import { useState } from "react";
 import { useQuery } from "react-query";
 import { getGeo } from "../../../api/geoLocation";
 
-const useSelect = (city: string) => {
+const useSelect = () => {
+  const [city, setCity] = useState("");
   const { data: country, status: countryStatus } = useQuery(
-    "country",
+    ["country", city],
     async () => {
       const { data } = await getGeo(city);
       return data;
     }
   );
 
-  return { country, countryStatus };
+  return { country, countryStatus, setCity };
 };
 
 export default useSelect;
