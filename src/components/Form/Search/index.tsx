@@ -1,7 +1,9 @@
 const Search = () => {
+  // const { country, countryStatus } = useSelect("London");
+  // console.log(country, countryStatus);
   return (
     <div>
-      <input type="text" placeholder="search" />
+      <input className="border" type="text" placeholder="search" />
     </div>
   );
 };

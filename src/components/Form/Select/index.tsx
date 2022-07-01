@@ -1,27 +1,16 @@
-// import useSelect from "./useSelect";
-
 import { useState } from "react";
 import ReactFlagsSelect from "react-flags-select";
+import { countries } from "../../../consts/consts";
 
 const Select = () => {
-  // const { country, countryStatus } = useSelect("London");
-  // console.log(country, countryStatus);
-  const [selected, setSelected] = useState<string>("");
+  const [selected, setSelected] = useState<string>("RS");
   console.log(selected);
   return (
     <div className="">
       <ReactFlagsSelect
         selected={selected}
         onSelect={(code) => setSelected(code)}
-        countries={["US", "GB", "FR", "DE", "IT", "NL"]}
-        customLabels={{
-          US: "US",
-          GB: "GB",
-          FR: "FR",
-          DE: "DE",
-          IT: "IT",
-          NL: "NL",
-        }}
+        customLabels={countries}
       />
     </div>
   );
