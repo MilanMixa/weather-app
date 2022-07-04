@@ -1,9 +1,10 @@
 import { SetStateAction, useContext } from "react";
-import { SearchContext } from "./SearchContext";
+import useSearch from "./useSearch";
+// import { SearchContext } from "./SearchContext";
 
 const Search = () => {
-  // const { setCity, city } = useSearch();
-  const { setCity, city } = useContext(SearchContext);
+  const { setCity, city } = useSearch();
+  // const { setCity, city } = useContext(SearchContext);
   // const debouncedValue = useDebounce<string>(city, 500);
 
   const handleChange = (e: { target: { value: SetStateAction<string> } }) => {
