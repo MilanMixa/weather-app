@@ -1,5 +1,5 @@
 import { SetStateAction, useContext } from "react";
-import useSearch from "../../hooks/useSearch";
+import useSearch from "../../containers/Home/useHome";
 // import { SearchContext } from "./SearchContext";
 
 const Search = () => {

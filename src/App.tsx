@@ -1,6 +1,6 @@
 // import SearchContextProvider from "./components/Form/Search/SearchContext";
 import ReactQueryProvider from "./components/Providers/ReactQueryProvider";
-import HomePage from "./containers/HomePage";
+import HomePage from "./containers/Home";
 
 function App() {
   return (
