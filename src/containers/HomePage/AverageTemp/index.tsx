@@ -1,4 +1,4 @@
-import useSearch from "../Search/useSearch";
+import useSearch from "../../../hooks/useSearch";
 
 const AverageTemp = () => {
   const { cityData } = useSearch();

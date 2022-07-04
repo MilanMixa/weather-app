@@ -1,4 +1,4 @@
-import AverageTemp from "../../components/AverageTemp";
+import AverageTemp from "./AverageTemp";
 import Form from "./Form";
 import WeeklyTemp from "./WeeklyTemp";
 
