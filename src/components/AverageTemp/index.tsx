@@ -1,4 +1,4 @@
-import useSearch from "../Form/Search/useSearch";
+import useSearch from "../Search/useSearch";
 
 const AverageTemp = () => {
   const { cityData } = useSearch();

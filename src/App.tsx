@@ -1,19 +1,16 @@
 import AverageTemp from "./components/AverageTemp";
-import Form from "./components/Form";
+import Form from "./containers/Form";
 // import SearchContextProvider from "./components/Form/Search/SearchContext";
 import ReactQueryProvider from "./components/Providers/ReactQueryProvider";
-import WeeklyTemp from "./components/WeeklyTemp";
+import WeeklyTemp from "./containers/WeeklyTemp";
+import HomePage from "./containers/HomePage";
 
 function App() {
   return (
     <ReactQueryProvider>
       {/* <SearchContextProvider> */}
       <div className="bg-gradient-to-r from-cyan-400 to-blue-400 h-screen flex justify-center items-center">
-        <div className="w-[500px] bg-white flex justify-center items-center flex-col">
-          <Form />
-          <AverageTemp />
-          <WeeklyTemp />
-        </div>
+        <HomePage />
       </div>
       {/* </SearchContextProvider> */}
     </ReactQueryProvider>

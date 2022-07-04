@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useQuery } from "react-query";
-import { getGeo } from "../../../api/geoLocation";
-import useDebounce from "../../../hooks/useDebounce";
+import { getGeo } from "../../api/geoLocation";
+import useDebounce from "../../hooks/useDebounce";
 // import { SearchContext } from "./SearchContext";
 
 const useSearch = () => {
@@ -15,7 +15,8 @@ const useSearch = () => {
     async () => {
       const { data } = await getGeo(debouncedValue);
       return data;
-    }
+    },
+    { retry: false }
   );
   return { cityData, cityStatus, city, setCity };
 };

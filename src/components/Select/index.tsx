@@ -1,6 +1,6 @@
 import { useState } from "react";
 import ReactFlagsSelect from "react-flags-select";
-import { countries } from "../../../consts/consts";
+import { countries } from "../../utils/consts";
 
 const Select = () => {
   const [selected, setSelected] = useState<string>("RS");
