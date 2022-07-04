@@ -1,5 +1,5 @@
-import Search from "../../components/Search";
-import Select from "../../components/Select";
+import Search from "../../../components/Search";
+import Select from "../../../components/Select";
 
 const Form = () => {
   return (

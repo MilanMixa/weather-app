@@ -1,6 +1,6 @@
 import AverageTemp from "../../components/AverageTemp";
-import Form from "../Form";
-import WeeklyTemp from "../WeeklyTemp";
+import Form from "./Form";
+import WeeklyTemp from "./WeeklyTemp";
 
 const HomePage = () => {
   return (

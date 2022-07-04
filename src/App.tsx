@@ -1,8 +1,5 @@
-import AverageTemp from "./components/AverageTemp";
-import Form from "./containers/Form";
 // import SearchContextProvider from "./components/Form/Search/SearchContext";
 import ReactQueryProvider from "./components/Providers/ReactQueryProvider";
-import WeeklyTemp from "./containers/WeeklyTemp";
 import HomePage from "./containers/HomePage";
 
 function App() {
