@@ -2,7 +2,7 @@ import AverageTemp from "./AverageTemp";
 import Form from "./Form";
 import WeeklyTemp from "./WeeklyTemp";
 
-const HomePage = () => {
+const Home = () => {
   return (
     <div className="w-[500px] bg-white flex justify-center items-center flex-col">
       <Form />
@@ -12,4 +12,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default Home;
