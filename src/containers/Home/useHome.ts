@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useQuery } from "react-query";
 import { getCityWeather, getGeo } from "../../api/data";
+import { SelectContext } from "../../components/Select/SelectContext";
 import useDebounce from "../../hooks/useDebounce";
 
 const useHome = () => {
@@ -8,21 +9,24 @@ const useHome = () => {
   // console.log(debouncedValue);
   const [city, setCity] = useState<string>("");
   const [cordinates, setCordinates] = useState<any>([]);
+  const { selected } = useContext(SelectContext);
   const debouncedValue = useDebounce<string>(city, 500);
   console.log(cordinates, "cordinates");
 
   // fetching lon and lat
   const { data: weatherData, status: cityStatus } = useQuery(
-    ["city", debouncedValue],
+    ["city", debouncedValue, selected],
     async () => {
-      const { data: cityData } = await getGeo(debouncedValue);
+      const { data: cityData } = await getGeo(debouncedValue, selected);
       console.log(cityData, "cityData");
-      // const city = cityData.filter((city: any) => city.country === "US");
-      // console.log(city, "test");
-      const lonAndLanStates: { lat: string; lon: string, state?: string }[] = [];
+
+      const lonAndLanStates: { lat: string; lon: string }[] = [];
       cityData.forEach((data: any) => {
-        if (data.country === "US") {
-          lonAndLanStates.push({ lat: data.lon, lon: data.lat, state: data.state });
+        if (data.country === selected) {
+          lonAndLanStates.push({
+            lat: data.lat,
+            lon: data.lon,
+          });
         }
       });
       setCordinates(lonAndLanStates);

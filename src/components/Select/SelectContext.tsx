@@ -1,18 +1,27 @@
-import { createContext, Dispatch, SetStateAction, useState } from "react";
+import {
+  createContext,
+  Dispatch,
+  FC,
+  ReactNode,
+  SetStateAction,
+  useState,
+} from "react";
 
-// type SelectContextProvider = {
-//   children: ReactNode;
-// };
+type SelectContextProviderType = {
+  children: ReactNode;
+};
 
 export type SelectedContextType = {
   selected: string;
   setSelected: Dispatch<SetStateAction<string>>;
 };
 
-export const SelectContext = createContext<SelectedContextType | null>(null);
+const initialState = { selected: "", setSelected: () => {} };
 
-const SelectContextProvider = ({ children }: any) => {
-  const [selected, setSelected] = useState<string>("RS");
+export const SelectContext = createContext<SelectedContextType>(initialState);
+
+const SelectContextProvider: FC<SelectContextProviderType> = ({ children }) => {
+  const [selected, setSelected] = useState<string>("US");
   return (
     <SelectContext.Provider value={{ selected, setSelected }}>
       {children}

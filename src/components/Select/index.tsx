@@ -1,12 +1,12 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import ReactFlagsSelect from "react-flags-select";
 import { countries } from "../../utils/consts";
-import SelectContext from "./SelectContext";
+import { SelectedContextType, SelectContext } from "./SelectContext";
 
 const Select = () => {
-  // const [selected, setSelected] = useState<string>("RS");
-  // console.log(selected);
-  const { selected, setSelected } = useContext(SelectContext);
+  const { selected, setSelected } =
+    useContext<SelectedContextType>(SelectContext);
+
   return (
     <div className="">
       <ReactFlagsSelect
