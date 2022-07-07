@@ -1,27 +1,61 @@
-import { SetStateAction, useContext } from "react";
+import { Field, Form, FormikProvider, useFormik } from "formik";
+import { useState } from "react";
 import useHome from "../../containers/Home/useHome";
-// import { SearchContext } from "./SearchContext";
+import useWeather from "../../containers/Home/useWeather";
+
+type CityType = {
+  name: string;
+  lat: number;
+  lon: number;
+  country: string;
+  state: string;
+};
 
 const Search = () => {
-  const { setCity, city } = useHome();
-  // console.log(weatherData, "weather data");
-  // const { setCity, city } = useContext(SearchContext);
-  // const debouncedValue = useDebounce<string>(city, 500);
+  const formik = useFormik({
+    initialValues: {
+      search: "",
+    },
+    onSubmit: () => {},
+  });
 
-  const handleChange = (e: { target: { value: SetStateAction<string> } }) => {
-    setCity(e.target.value);
-  };
+  const { values } = formik;
+
+  const [selectedCity, setSelectedCity] = useState<CityType | null>();
+
+  const { cityData } = useHome({
+    search: values.search,
+  });
+
+  const { weatherData } = useWeather({
+    lat: selectedCity?.lat,
+    lon: selectedCity?.lon,
+  });
 
   return (
-    <div>
-      <input
-        className="border"
-        type="text"
-        placeholder="search"
-        onChange={handleChange}
-        value={city}
-      />
-    </div>
+    <FormikProvider value={formik}>
+      <Form>
+        <Field
+          className="border"
+          type="text"
+          name="search"
+          placeholder="search"
+          autoComplete="off"
+        />
+        <ul>
+          {cityData?.map((singleCity: any) => {
+            return (
+              <li
+                onClick={() => setSelectedCity(singleCity)}
+                key={singleCity.lat + singleCity.lon}
+              >
+                {singleCity.name}, {singleCity.state}
+              </li>
+            );
+          })}
+        </ul>
+      </Form>
+    </FormikProvider>
   );
 };
 
