@@ -6,15 +6,16 @@ import useDebounce from "../../hooks/useDebounce";
 
 const useHome = ({ search }: { search: string }) => {
   const { selected } = useContext(SelectContext);
+  const debouncedValue = useDebounce<string>(search);
 
   // fetching lon and lat
   const { data: cityData, status: cityStatus } = useQuery(
-    ["city", useDebounce(search), selected],
+    ["city", debouncedValue, selected],
     async () => {
-      const { data: cityData } = await getGeo(search, selected);
+      const { data: cityData } = await getGeo(debouncedValue, selected);
       return cityData;
     },
-    { enabled: Boolean(search.length) }
+    { enabled: Boolean(debouncedValue.length) }
   );
 
   return { cityData, cityStatus };

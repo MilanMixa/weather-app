@@ -1,17 +1,14 @@
 import { Field, Form, FormikProvider, useFormik } from "formik";
-import { useState } from "react";
-import useHome from "../../containers/Home/useHome";
-import useWeather from "../../containers/Home/useWeather";
+import { useContext } from "react";
 
-type CityType = {
-  name: string;
-  lat: number;
-  lon: number;
-  country: string;
-  state: string;
-};
+//HOOKS:
+import useHome from "../../containers/Home/useHome";
+import { SearchContext } from "./SearchContext";
 
 const Search = () => {
+  const { selectedCity, setSelectedCity } = useContext(SearchContext);
+  console.log(selectedCity);
+
   const formik = useFormik({
     initialValues: {
       search: "",
@@ -21,15 +18,8 @@ const Search = () => {
 
   const { values } = formik;
 
-  const [selectedCity, setSelectedCity] = useState<CityType | null>();
-
   const { cityData } = useHome({
     search: values.search,
-  });
-
-  const { weatherData } = useWeather({
-    lat: selectedCity?.lat,
-    lon: selectedCity?.lon,
   });
 
   return (
@@ -43,16 +33,26 @@ const Search = () => {
           autoComplete="off"
         />
         <ul>
-          {cityData?.map((singleCity: any) => {
-            return (
-              <li
-                onClick={() => setSelectedCity(singleCity)}
-                key={singleCity.lat + singleCity.lon}
-              >
-                {singleCity.name}, {singleCity.state}
-              </li>
-            );
-          })}
+          {`${selectedCity?.name}, ${selectedCity?.state}` !== values.search &&
+            cityData?.map((singleCity: any) => {
+              return (
+                <li
+                  onClick={() => {
+                    return (
+                      setSelectedCity(singleCity),
+                      formik.resetForm({
+                        values: {
+                          search: `${singleCity.name}, ${singleCity.state}`,
+                        },
+                      })
+                    );
+                  }}
+                  key={singleCity.lat + singleCity.lon}
+                >
+                  {singleCity.name}, {singleCity.state}
+                </li>
+              );
+            })}
         </ul>
       </Form>
     </FormikProvider>
