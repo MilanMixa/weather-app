@@ -7,7 +7,6 @@ import { SearchContext } from "./SearchContext";
 
 const Search = () => {
   const { selectedCity, setSelectedCity } = useContext(SearchContext);
-  console.log(selectedCity);
 
   const formik = useFormik({
     initialValues: {
