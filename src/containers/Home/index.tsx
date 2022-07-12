@@ -37,8 +37,9 @@ const Home = () => {
   console.log(dailyData);
 
   let sum = 0;
+  let nesto: any[] = [];
 
-  dailyData?.forEach((element: any) => {
+  dailyData?.forEach((element: any, index: any) => {
     console.log(element, "element");
     let min = element[0].main.temp_min;
     let max = element[0].main.temp_max;
@@ -52,12 +53,14 @@ const Home = () => {
       }
     });
     let dailyAvg = (max + min) / 2;
+    nesto[index] = dailyAvg;
     console.log(dailyAvg, "daily avg");
     sum += dailyAvg;
   });
 
   let avgTemp = sum / 5;
   console.log(avgTemp, "avg temp");
+  console.log(nesto, "nesto");
 
   return (
     <div className="w-[500px] bg-white flex justify-center items-center flex-col">
