@@ -1,4 +1,4 @@
-const WeeklyTemp = () => {
+const WeeklyTemp = ({ fiveDayInfo }: any) => {
   return (
     <div className="flex gap-x-3">
       <div>
