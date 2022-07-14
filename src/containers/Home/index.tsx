@@ -22,6 +22,9 @@ const Home = () => {
   // console.log(weatherData, "weather data");
   // console.log(firstDay, lastDay, "datum");
 
+  const city = selectedCity?.name;
+  const state = selectedCity?.state;
+
   // getting single date
   let dailyData: any = [];
 
@@ -38,7 +41,7 @@ const Home = () => {
 
   type FiveDayInfo = {
     dailyAvgTemp: number;
-    day: number;
+    day: any;
   };
 
   let sum: number = 0;
@@ -64,7 +67,7 @@ const Home = () => {
     let dailyAvg = Number(((max + min) / 2).toFixed(0));
     fiveDayInfo[index] = {
       dailyAvgTemp: dailyAvg,
-      day: dayjs.unix(singleDay).get("date"),
+      day: dayjs.unix(singleDay),
     };
     // console.log(dailyAvg, "daily avg");
     sum += dailyAvg;
@@ -76,6 +79,7 @@ const Home = () => {
   return (
     <div className="w-[500px] bg-white flex justify-center items-center flex-col">
       <Form />
+      {/* {city} {state} */}
       <AverageTemp firstDay={firstDay} lastDay={lastDay} avgTemp={avgTemp} />
       <WeeklyTemp fiveDayInfo={fiveDayInfo} />
     </div>
