@@ -44,12 +44,25 @@ const Home = () => {
     day: any;
   };
 
+  type ElementType = {
+    clouds: {};
+    day: number;
+    dt: number;
+    dt_txt: string;
+    main: {};
+    pop: 0;
+    sys: {};
+    visibility: number;
+    weather: [{}];
+    wind: {};
+  }[];
+
   let sum: number = 0;
   let fiveDayInfo: FiveDayInfo[] = [];
   let singleDay: number = 0;
 
   dailyData?.forEach((element: any, index: number) => {
-    // console.log(element, "element");
+    console.log(element, "element");
     let min = element[0].main.temp_min;
     let max = element[0].main.temp_max;
     // console.log(min, max, "min i max");
@@ -79,7 +92,9 @@ const Home = () => {
   return (
     <div className="w-[500px] bg-white flex justify-center items-center flex-col">
       <Form />
-      {/* {city} {state} */}
+      <p>
+        {city} {state}
+      </p>
       <AverageTemp firstDay={firstDay} lastDay={lastDay} avgTemp={avgTemp} />
       <WeeklyTemp fiveDayInfo={fiveDayInfo} />
     </div>

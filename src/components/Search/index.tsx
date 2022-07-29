@@ -5,6 +5,14 @@ import { useContext } from "react";
 import useHome from "../../containers/Home/useHome";
 import { SearchContext } from "./SearchContext";
 
+export type SingleCityTypes = {
+  name: string;
+  lat: number;
+  lon: number;
+  country: string;
+  state?: string;
+};
+
 const Search = () => {
   const { selectedCity, setSelectedCity } = useContext(SearchContext);
 
@@ -33,7 +41,8 @@ const Search = () => {
         />
         <ul>
           {`${selectedCity?.name}, ${selectedCity?.state}` !== values.search &&
-            cityData?.map((singleCity: any) => {
+            cityData?.map((singleCity: SingleCityTypes) => {
+              // console.log(singleCity, "single city");
               return (
                 <li
                   onClick={() => {
