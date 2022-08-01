@@ -1,11 +1,6 @@
-import { createContext, Dispatch, SetStateAction, useState } from "react";
+import { createContext, FC, useState } from "react";
+import { SelectContextProviderType } from "../Select/SelectContext";
 
-// type InitialState {
-//   city: string;
-//   setCity: Dispatch<SetStateAction<string>>;
-// }
-
-// const initialState = { city, setCity };
 export type CityType = {
   name: string;
   lat: number;
@@ -16,7 +11,7 @@ export type CityType = {
 
 export const SearchContext = createContext<any>({});
 
-export default function SearchContextProvider({ children }: any) {
+const SearchContextProvider: FC<SelectContextProviderType> = ({ children }) => {
   const [selectedCity, setSelectedCity] = useState<CityType | null>();
 
   return (
@@ -24,4 +19,6 @@ export default function SearchContextProvider({ children }: any) {
       {children}
     </SearchContext.Provider>
   );
-}
+};
+
+export default SearchContextProvider;

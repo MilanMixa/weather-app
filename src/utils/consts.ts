@@ -221,3 +221,10 @@ export const countries = {
   ZM: "ZM",
   ZW: "ZW",
 };
+
+// export const countries = (
+//   Object.keys(unsortedCountries) as Array<keyof typeof unsortedCountries>
+// )
+//   .sort()
+//   .reduce((r: any, k) => ((r[k] = unsortedCountries[k]), r), {});
+// console.log(countries, "sortirano");

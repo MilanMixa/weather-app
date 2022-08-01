@@ -1,12 +1,12 @@
 import dayjs from "dayjs";
 
 const AverageTemp = ({
-  firstDay = undefined,
+  firstDay,
   lastDay,
   avgTemp,
 }: {
-  firstDay: string | undefined;
-  lastDay: string | undefined;
+  firstDay: string;
+  lastDay: string;
   avgTemp: number;
 }) => {
   const formatedFirstDay: string = dayjs(firstDay).format("MMM DD -");

@@ -6,6 +6,57 @@ import Form from "./Form";
 import useWeather from "./useWeather";
 import WeeklyTemp from "./WeeklyTemp";
 
+export type FiveDayInfo = {
+  dailyAvgTemp: number;
+  day: any;
+};
+
+type Main = {
+  feels_like: number;
+  grnd_level: number;
+  humidity: number;
+  pressure: number;
+  sea_level: number;
+  temp: number;
+  temp_kf: number;
+  temp_max: number;
+  temp_min: number;
+};
+
+type Clouds = {
+  all: number;
+};
+
+type Sys = {
+  pod: string;
+};
+
+type Wind = {
+  deg: number;
+  gust: number;
+  speed: number;
+};
+
+type Weather = {
+  description: string;
+  icon: string;
+  id: number;
+  main: string;
+};
+
+type ElementType = {
+  clouds: Clouds;
+  day: number;
+  dt: number;
+  dt_txt: string;
+  main: Main;
+  pop: number;
+  sys: Sys;
+  visibility: number;
+  weather: Weather;
+  wind: Wind;
+};
+
 const Home = () => {
   const { selectedCity } = useContext(SearchContext);
 
@@ -26,48 +77,30 @@ const Home = () => {
   const state = selectedCity?.state;
 
   // getting single date
-  let dailyData: any = [];
+  let dailyData: Array<ElementType[]> = [];
 
-  weatherData?.list.forEach((item: { dt: number }) => {
+  weatherData?.list.forEach((item: ElementType) => {
     const dateTime = dayjs.unix(item.dt);
     const day = dateTime.get("date");
     // check if dailyData map has it
     if (!dailyData[day]) dailyData[day] = [];
     dailyData[day].push({ ...item, day });
+    // console.log(dailyData);
     return dailyData;
   });
-
-  // console.log(dailyData);
-
-  type FiveDayInfo = {
-    dailyAvgTemp: number;
-    day: any;
-  };
-
-  type ElementType = {
-    clouds: {};
-    day: number;
-    dt: number;
-    dt_txt: string;
-    main: {};
-    pop: 0;
-    sys: {};
-    visibility: number;
-    weather: [{}];
-    wind: {};
-  }[];
 
   let sum: number = 0;
   let fiveDayInfo: FiveDayInfo[] = [];
   let singleDay: number = 0;
 
-  dailyData?.forEach((element: any, index: number) => {
-    console.log(element, "element");
+  dailyData?.forEach((element: ElementType[], index: number) => {
+    // console.log(element, "element");
     let min = element[0].main.temp_min;
     let max = element[0].main.temp_max;
     // console.log(min, max, "min i max");
-    element.forEach((newElement: any) => {
+    element.forEach((newElement: ElementType) => {
       singleDay = newElement.dt;
+      // console.log(newElement, "novi element");
       // console.log(singleDay, "test test");
       // console.log(newElement, "novi element");
       if (newElement.main.temp_min < min) {

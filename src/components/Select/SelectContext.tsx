@@ -7,7 +7,7 @@ import {
   useState,
 } from "react";
 
-type SelectContextProviderType = {
+export type SelectContextProviderType = {
   children: ReactNode;
 };
 
