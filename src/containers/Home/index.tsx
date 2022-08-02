@@ -122,14 +122,36 @@ const Home = () => {
   let avgTemp = Number((sum / 5).toFixed(0));
   // console.log(fiveDayInfo, "nesto");
 
+  let hue = 40 + (240 * (40 - avgTemp)) / 60;
+
+  if (hue / 100 > 1 && hue > 60 && hue < 160) {
+    hue = 175;
+  }
+
+  if (hue / 100 < 1 && hue > 60 && hue < 160) {
+    hue = 65;
+  }
+  console.log(hue, "hue");
+
   return (
-    <div className="w-[500px] bg-white flex justify-center items-center flex-col">
-      <Form />
-      <p>
-        {city} {state}
-      </p>
-      <AverageTemp firstDay={firstDay} lastDay={lastDay} avgTemp={avgTemp} />
-      <WeeklyTemp fiveDayInfo={fiveDayInfo} />
+    <div className="h-screen flex justify-center items-center">
+      <div
+        className="w-full h-full flex justify-center items-center flex-col"
+        style={{
+          background: `linear-gradient(120deg, hsl(${hue}, 81.8%, 35%), hsl(${hue}, 100%, 65%), hsl(${
+            hue - 40
+          }, 100%, 70%))`,
+        }}
+      >
+        <div className="w-[500px] bg-white flex justify-center items-center flex-col">
+          <Form />
+        </div>
+        <p>
+          {city} {state}
+        </p>
+        <AverageTemp firstDay={firstDay} lastDay={lastDay} avgTemp={avgTemp} />
+        <WeeklyTemp fiveDayInfo={fiveDayInfo} />
+      </div>
     </div>
   );
 };
