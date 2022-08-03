@@ -53,7 +53,7 @@ type ElementType = {
   pop: number;
   sys: Sys;
   visibility: number;
-  weather: Weather;
+  weather: Weather[];
   wind: Wind;
 };
 
@@ -85,7 +85,6 @@ const Home = () => {
     // check if dailyData map has it
     if (!dailyData[day]) dailyData[day] = [];
     dailyData[day].push({ ...item, day });
-    // console.log(dailyData);
     return dailyData;
   });
 
@@ -100,9 +99,8 @@ const Home = () => {
     // console.log(min, max, "min i max");
     element.forEach((newElement: ElementType) => {
       singleDay = newElement.dt;
-      // console.log(newElement, "novi element");
-      // console.log(singleDay, "test test");
-      // console.log(newElement, "novi element");
+      console.log(newElement, "novi element");
+      console.log(newElement.weather[0].icon, "weather");
       if (newElement.main.temp_min < min) {
         min = newElement.main.temp_min;
       }
@@ -111,6 +109,7 @@ const Home = () => {
       }
     });
     let dailyAvg = Number(((max + min) / 2).toFixed(0));
+    console.log(dailyAvg, "daily avg");
     fiveDayInfo[index] = {
       dailyAvgTemp: dailyAvg,
       day: dayjs.unix(singleDay),
@@ -123,16 +122,20 @@ const Home = () => {
   // console.log(fiveDayInfo, "nesto");
 
   let hue = 40 + (240 * (40 - avgTemp)) / 60;
+  // console.log(hue, "hue hue hue");
 
-  if (hue / 100 > 1 && hue > 60 && hue < 160) {
-    hue = 175;
-  }
-
-  if (hue / 100 < 1 && hue > 60 && hue < 160) {
+  if (hue / 100 > 1 && hue > 60 && hue <= 160) {
     hue = 65;
+  } else if (hue / 100 <= 1 && hue > 60 && hue < 160) {
+    hue = 40;
   }
-  console.log(hue, "hue");
 
+  if (hue >= 250 && hue <= 360) {
+    hue = 240;
+  }
+  // console.log(hue, "hue");
+  // const nestoLudo = (100 / 80) * ((30 + 40) / 80);
+  // console.log("nesto lugo", nestoLudo);
   return (
     <div className="h-screen flex justify-center items-center">
       <div
@@ -141,6 +144,9 @@ const Home = () => {
           background: `linear-gradient(120deg, hsl(${hue}, 81.8%, 35%), hsl(${hue}, 100%, 65%), hsl(${
             hue - 40
           }, 100%, 70%))`,
+          // background: `linear-gradient(120deg, rgba(14,58,140,1) 0%, rgba(150,218,255,1) ${
+          //   80 * (1 - nestoLudo)
+          // }%, rgba(255,148,87,1) 100%)`,
         }}
       >
         <div className="w-[500px] bg-white flex justify-center items-center flex-col">
